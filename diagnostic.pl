@@ -1,18 +1,17 @@
-/*fonction de depart*/
+/*fonction principale*/
 
 
 check :-
 hypotheses(Disease),
 nl,
-write('Vous souffrez peut être : '),
+write('Vous souffrez probablement de : '),
 write(Disease),
 nl,
 suggestions(Disease),
 nl,
 undo.
 
-/* hypotheses, differentes maladies a verifier */
-/* yes */
+/* hypothèses, différentes maladies a verifier */
 
 hypotheses(paludisme) :- paludisme ,  !.
 hypotheses(tuberculose) :- tuberculose ,  !.
@@ -24,7 +23,7 @@ hypotheses(meningite) :- meningite , !.
 hypotheses(amibiase) :- amibiase ,  !.
 hypotheses(tumeur_cerveau) :- tumeur_cerveau ,  !.
 hypotheses(tumeur_mep) :- tumeur_mep ,  !.
-hypotheses(kwachekor) :-  kwachekor ,  !.
+hypotheses(kwashiokor) :-  kwashiokor ,  !.
 hypotheses(diabete_type_2) :-  diabete_type_2, ! .
 hypotheses(diabete_type_1) :-  diabete_type_1, !.
 hypotheses(anemie) :- anemie , !.
@@ -50,6 +49,11 @@ hypotheses(herpes_genital) :- herpes_genital , !.
 hypotheses(hepatiteA) :- hepatiteA , !.
 hypotheses(hepatiteB) :- hepatiteB , !.
 hypotheses(avc) :- avc , !.
+hypotheses(myopie) :- myopie , !.
+hypotheses(hypermetropie) :- hypermetropie , !.
+hypotheses(varicelle) :- varicelle , !.
+hypotheses(urticaire) :- urticaire , !.
+
 
 /*suggestions des maladies du moteur*/
 
@@ -154,7 +158,7 @@ write('Vous devriez vous rendre a l\'hopital le plus vite possible.'),
 nl.
 
 
-suggestions(kwachekor) :-
+suggestions(kwashiokor) :-
 nl,
 write('Traitements: '),
 nl,
@@ -527,6 +531,35 @@ nl,
 write('inhibiteur de l\'enzyme de conversion'),
 nl.
 
+suggestions(myopie) :-
+nl,
+write('Suggestions:'),
+nl,
+write('Port de lunettes correctrices'),
+nl.
+
+suggestions(hypermetropie) :-
+nl,
+write('Suggestions:'),
+nl,
+write('Port de lunettes correctrices'),
+nl.
+
+
+suggestions(varicelle) :-
+nl,
+write('Le traitement repose sur la prise d\'antihistaminiques ,d\'anticeptiques,d\'antalgiques et d\'antiviral dans des cas plus grave .'),
+nl,
+write('Pour Une prevention , le vaccin varilix ou varivax peut etre utilise .'),
+nl.
+
+suggestions(urticaire) :-
+nl,
+write('Le traitement repose sur la prise d\'antihistaminiques,d\'anti inflamatoires .'),
+nl,
+write('Et refroidir la zone lesee avec une compresse froide pour calmer les demengeaisons .'),
+nl.
+
 /* Bases de connaissances */
 
 
@@ -596,7 +629,7 @@ verify(troubles_vessie),
 verify(troubles_intestinaux).
 
 
-kwachekor :-
+kwashiokor :-
 verify(fatigue),
 verify(irritabilite),
 verify(anorexie),
@@ -624,9 +657,9 @@ verify(vision_trouble),
 verify(nausees),
 verify(vomissements),
 verify(perte_d_appetit),
-verify('somnolence'),
-verify('troubles_vue'),
-verify('odeur_anormale_urine').
+verify(somnolence),
+verify(troubles_vue),
+verify(odeur_anormale_urine).
 
 avitaminose_A :-
 verify(troubles_vision_nocturne),
@@ -851,6 +884,30 @@ verify(manque_coordination),
 verify(difficultes_elocution),
 verify(vision_trouble).
 
+myopie :-
+verify(vision_loin_floue).
+
+hypermetropie :-
+verify(difficulte_lecture),
+verify(vision_pres_floue),
+verify(vision_loin_effort).
+
+varicelle :-
+verify(fievre),
+verify(coulees_nasales),
+verify(demangeaisons),
+verify(tache_rouge),
+verify(maux_tete),
+verify(maux_gorge),
+verify(ganglion_lymplatique_enfle).
+
+urticaire :-
+verify(peau_epaissie),
+verify(gonflement_peau),
+verify(papules_surelevees_irritantes),
+verify(inflamation_peau).
+
+
 /* comment poser la question a un utilisateur */
 
 poserQuestion(Question) :-
@@ -879,3 +936,10 @@ poserQuestion(S))).
 undo :- retract(yes(_)), fail.
 undo :- retract(no(_)), fail.
 undo.
+
+
+
+
+
+
+
